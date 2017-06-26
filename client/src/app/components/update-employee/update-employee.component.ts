@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { EmployeeService } from '../../services/employee.service';
 
-//import { FlashMessagesService } from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { Employee } from '../../Models/IEmployee';
 
 
@@ -22,7 +22,7 @@ export class UpdateEmployeeComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
              private employeeService: EmployeeService,
-            //  private flashMessagesService: FlashMessagesService,
+             private flashMessagesService: FlashMessagesService,
              private activatedRoute: ActivatedRoute,
              private router: Router) { 
               this.createForm();
@@ -76,24 +76,23 @@ export class UpdateEmployeeComponent implements OnInit {
       if(!data.success) {
         //this.flashMessagesService.show('Something went wrong', { cssClass:'alert-danger', timeout: 3000}); 
       } else {        
-        this.employee = data.message[0];                 
+        this.employee = data.message[0];
+        // Update Data on the form
+        this.updateEmployeemployeeForm.patchValue({
+          firstname: this.employee.firstname,
+          lastname: this.employee.lastname,
+          password: this.employee.password,
+          dob: this.employee.dob,
+          city: this.employee.city,
+          userType: this.employee.userType,
+          userStatus: this.employee.userStatus
+        });                 
       }
     });    
   }
 
   onEmployeeUpdateSubmit() {    
-    this.emp = this.employee;
-    //console.log(this.emp);
-    // let newEmp = this.updateEmployeemployeeForm.patchValue({
-    //   firstname: this.updateEmployeemployeeForm.get('firstname').value,
-    //   lastname: this.updateEmployeemployeeForm.get('lastname').value,      
-    //   password: this.updateEmployeemployeeForm.get('password').value,
-    //   dob: this.updateEmployeemployeeForm.get('dob').value,
-    //   city: this.updateEmployeemployeeForm.get('city').value,
-    //   userType: this.updateEmployeemployeeForm.get('userType').value,
-    //   userStatus: this.updateEmployeemployeeForm.get('userStatus').value
-    // });
-    //console.log("New Employee ", newEmp);
+    this.emp = this.employee;        
     console.log("Update ", this.updateEmployeemployeeForm.value);
     let employee = {
       firstname: this.updateEmployeemployeeForm.get('firstname').value,
@@ -107,13 +106,13 @@ export class UpdateEmployeeComponent implements OnInit {
 
     return this.employeeService.updateEmployee(this.emp._id, employee).subscribe(data => {
       if(!data.success) {
-        //this.flashMessagesService.show('Something went wrong', { cssClass:'alert-danger', timeout: 3000}); 
+        this.flashMessagesService.show('Something went wrong', { cssClass:'alert-danger', timeout: 3000}); 
       } else {
-        //this.flashMessagesService.show('Employee updated successfully', { cssClass:'alert-success', timeout: 3000}); 
-        setTimeout(() => {
+        //this.flashMessagesService.show('Employee updated successfully', { cssClass:'alert-success', timeout: 3000});         
+      }
+      setTimeout(() => {
           this.router.navigate(['/'])
         }, 4000);
-      }
     });
   }
 

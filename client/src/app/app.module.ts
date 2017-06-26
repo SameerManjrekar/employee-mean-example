@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { EmployeeComponent } from './components/employee/employee.component';
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { GetEmployeesComponent } from './components/get-employees/get-employees.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     AddEmployeeComponent,
     ViewEmployeeComponent,
     UpdateEmployeeComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    GetEmployeesComponent
   ],
   imports: [
     BrowserModule,

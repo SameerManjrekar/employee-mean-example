@@ -6,6 +6,7 @@ import { ViewEmployeeComponent } from './components/view-employee/view-employee.
 import { UpdateEmployeeComponent } from './components/update-employee/update-employee.component';
 import { AppComponent } from './app.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { GetEmployeesComponent } from './components/get-employees/get-employees.component';
 
 const routes: Routes = [
   { path: '', component: AppComponent },
