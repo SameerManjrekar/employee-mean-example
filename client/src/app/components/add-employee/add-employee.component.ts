@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { EmployeeService } from '../../services/employee.service';
 
-// import { FlashMessagesService } from 'angular2-flash-messages'
+import { FlashMessagesService } from 'angular2-flash-messages'
 import { Employee } from '../../Models/IEmployee';
 
 
@@ -22,13 +22,13 @@ export class AddEmployeeComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
              private employeeService: EmployeeService,             
-             private router: Router
+             private router: Router,
+             private flashMessagesService: FlashMessagesService
              ) { 
     this.createForm();
   }
 
-  ngOnInit() {
-    this.getAllEmployees();    
+  ngOnInit() {    
   }
 
   createForm() {
@@ -75,46 +75,15 @@ export class AddEmployeeComponent implements OnInit {
 
     return this.employeeService.saveEmployee(employee).subscribe(data => {
       if(!data.success) {
-        //this.flashMessagesService.show('Something went wrong', { cssClass:'alert-danger', timeout: 3000}); 
+        this.flashMessagesService.show('Something went wrong', { cssClass:'alert-danger', timeout: 2000}); 
       } else {
-        //this.flashMessagesService.show('Employee saved successfully', { cssClass:'alert-success', timeout: 3000}); 
+        //this.flashMessagesService.show('Employee saved successfully', { cssClass:'alert-success', timeout: 2000});                 
       }
+      setTimeout(() => {
+          this.router.navigate(['/'])
+        }, 3000);
     });
-    
+     
   }  
-
-  getAllEmployees() {
-    return this.employeeService.getAllEmployees().subscribe(data => {
-      if(!data.success) {
-        //this.flashMessagesService.show('Something went wrong', { cssClass:'alert-danger', timeout: 3000}); 
-      } else {
-        this.employees = data.message;
-        console.log(this.employees);
-        //this.flashMessagesService.show('Employees returned successful', { cssClass:'alert-success', timeout: 3000}); 
-      }
-    });
-  }
-
-  viewEmployee(employee: any) {
-    console.log(employee);    
-    let link = (['/viewemployee/' + employee._id]);
-    this.router.navigate(link);    
-  }
-
-  updateEmployee(employee : any) {
-    console.log(employee);
-    this.router.navigate(['/updateemployee/' + employee._id]);
-  }
-
-  deleteEmployee(id: number) {
-    alert('Do you want to delete employee?');
-    return this.employeeService.deleteEmployee(id).subscribe(data => {
-      if(!data.success) {
-        //this.flashMessagesService.show('Something went wrong', { cssClass:'alert-danger', timeout: 3000}); 
-      } else {
-        //this.flashMessagesService.show('Employee deleted successful', { cssClass:'alert-success', timeout: 3000}); 
-      }
-    })
-  }
 
 }

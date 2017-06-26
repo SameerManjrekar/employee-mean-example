@@ -83,9 +83,19 @@ export class UpdateEmployeeComponent implements OnInit {
 
   onEmployeeUpdateSubmit() {    
     this.emp = this.employee;
-    console.log(this.emp);
+    //console.log(this.emp);
+    // let newEmp = this.updateEmployeemployeeForm.patchValue({
+    //   firstname: this.updateEmployeemployeeForm.get('firstname').value,
+    //   lastname: this.updateEmployeemployeeForm.get('lastname').value,      
+    //   password: this.updateEmployeemployeeForm.get('password').value,
+    //   dob: this.updateEmployeemployeeForm.get('dob').value,
+    //   city: this.updateEmployeemployeeForm.get('city').value,
+    //   userType: this.updateEmployeemployeeForm.get('userType').value,
+    //   userStatus: this.updateEmployeemployeeForm.get('userStatus').value
+    // });
+    //console.log("New Employee ", newEmp);
     console.log("Update ", this.updateEmployeemployeeForm.value);
-    const employee = {
+    let employee = {
       firstname: this.updateEmployeemployeeForm.get('firstname').value,
       lastname: this.updateEmployeemployeeForm.get('lastname').value,      
       password: this.updateEmployeemployeeForm.get('password').value,

@@ -15,6 +15,8 @@ import { UpdateEmployeeComponent } from './components/update-employee/update-emp
 import { AppRoutingModule } from './app.routing.module';
 import { EmployeeComponent } from './components/employee/employee.component';
 
+import { FlashMessagesModule } from 'angular2-flash-messages';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,8 @@ import { EmployeeComponent } from './components/employee/employee.component';
     HttpModule,
     RouterModule,
     AppRoutingModule,
-    CommonModule
+    CommonModule,
+    FlashMessagesModule
   ],
   providers: [EmployeeService],
   bootstrap: [AppComponent]
